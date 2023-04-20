@@ -7,17 +7,17 @@ export default {
    * @param or
    * @return mixed
    */
-  or(value, or) {
+  or(value: any, or: any) {
     return value === undefined ? or : value;
   },
 
-  pad: function (n, width, z) {
+  pad: function (n: any, width: any, z: any = null) {
     z = z || '0';
     n = n + '';
     return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
   },
 
-  parseTime: function (times) {
+  parseTime: function (times: any) {
     if (times < 0) {
       times = 0;
     }
@@ -30,11 +30,11 @@ export default {
     return format;
   },
 
-  node: function (element) {
+  node: function (element: any) {
     return new Node(element);
   },
 
-  ready: function (call) {
+  ready: function (call: any) {
     this.node(window).listen('load', call);
   }
 };

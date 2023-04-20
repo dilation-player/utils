@@ -2,11 +2,13 @@
 // Class {Node}
 // ====================================================
 class Node {
+  selectors: any;
+
   /**
    * Constructor
    * @param selector
    */
-  constructor(selector) {
+  constructor(selector: any) {
     this.setSelector(selector);
   }
 
@@ -15,7 +17,7 @@ class Node {
    * @param selector
    * @return {string|Array|*[]}
    */
-  convertToArray(selector) {
+  convertToArray(selector: any) {
     if (selector instanceof NodeList) {
       for (var a = [], l = selector.length; l--; a[l] = selector[l]);
       selector = a;
@@ -32,7 +34,7 @@ class Node {
    * @param selector
    * @return {Node}
    */
-  setSelector(selector) {
+  setSelector(selector: any) {
     this.selectors = this.convertToArray(selector);
 
     return this;
@@ -45,7 +47,7 @@ class Node {
   allDom() {
     if (typeof this.selectors === 'string') {
       let nodes = document.querySelectorAll(this.selectors);
-      return this.convertToArray(nodes).filter((item) => typeof item !== 'string');
+      return this.convertToArray(nodes).filter((item: any) => typeof item !== 'string');
     }
 
     return this.selectors;
@@ -68,7 +70,7 @@ class Node {
    * @param selector
    * @return {Node}
    */
-  find(selector) {
+  find(selector: any) {
     let children = this.dom().querySelectorAll(selector);
     children = this.convertToArray(children);
 
@@ -88,7 +90,7 @@ class Node {
    * @param value
    * @return {*}
    */
-  height(value) {
+  height(value: any) {
     if (value === undefined) {
       let node = this.dom();
 
@@ -121,7 +123,7 @@ class Node {
    * @return {number}
    * @return {*}
    */
-  width(value) {
+  width(value: any) {
     if (value === undefined) {
       let node = this.dom();
 
@@ -153,7 +155,7 @@ class Node {
    * Add class to element
    * @param name
    */
-  addClass(name) {
+  addClass(name: any) {
     let selectors = this.allDom();
 
     for (var i = 0; i < selectors.length; ++i) {
@@ -167,7 +169,7 @@ class Node {
    * Remove class
    * @param name
    */
-  removeClass(name) {
+  removeClass(name: any) {
     let selectors = this.allDom();
 
     for (var i = 0; i < selectors.length; ++i) {
@@ -185,14 +187,14 @@ class Node {
    * @param value
    * @return {*}
    */
-  css(key, value) {
+  css(key: any, value: any = undefined) {
     // Check if is get CSS
     if (typeof key === 'string' && value === undefined) {
       return this.dom().style[key];
     }
 
     let selectors = this.allDom();
-    let values = {};
+    let values: any = {};
 
     if (typeof key === 'string') {
       values[key] = value;
@@ -215,14 +217,14 @@ class Node {
    * @param value
    * @return {*}
    */
-  attr(key, value) {
+  attr(key: any, value: any = undefined) {
     // Check if is get value
     if (typeof key === "string" && value === undefined) {
       return this.dom().getAttribute(key);
     }
 
     let selectors = this.allDom();
-    let values = {};
+    let values: any = {};
 
     if (typeof key === 'string') {
       values[key] = value;
@@ -232,7 +234,7 @@ class Node {
 
     for (let i = 0; i < selectors.length; i++) {
       for (let vKey in values) {
-        selectors.forEach(element => {
+        selectors.forEach((element: any) => {
           element.setAttribute(vKey, values[vKey]);
         });
       }
@@ -246,7 +248,7 @@ class Node {
    * @param value
    * @return *
    */
-  html(value) {
+  html(value: any = undefined) {
     if (value === undefined) {
       return this.dom().innerHTML;
     }
@@ -265,7 +267,7 @@ class Node {
    * @param name
    * @return {boolean}
    */
-  hasClass(name) {
+  hasClass(name: any) {
     return this.dom().classList.contains(name);
   }
 
@@ -274,7 +276,7 @@ class Node {
    * @param status
    * @return {Node}
    */
-  active(status) {
+  active(status: any) {
     let selectors = this.allDom();
 
     for (let i = 0; i < selectors.length; i++) {
@@ -301,7 +303,7 @@ class Node {
    * @param name
    * @param call
    */
-  listen(key, call) {
+  listen(key: any, call: any) {
     let keys = key.trim().replace(/\s/gi, ',').split(',');
     let selectors = this.allDom();
 
@@ -319,7 +321,7 @@ class Node {
    * @param value
    * @return {Node}
    */
-  val(value) {
+  val(value: any = undefined) {
     if (value === undefined) {
       return this.dom().value;
     }
@@ -353,7 +355,7 @@ class Node {
    * @param selector
    * @return {boolean}
    */
-  has(selector) {
+  has(selector: any) {
     return this.dom().contains(selector);
   }
 
@@ -361,7 +363,7 @@ class Node {
    * is
    * @param selector
    */
-  is(selector) {
+  is(selector: any) {
     return this.dom().isSameNode(selector);
   }
 
@@ -370,7 +372,7 @@ class Node {
    * @param selector
    * @return {*|HTMLElementTagNameMap[keyof HTMLElementTagNameMap]|Element|SVGElementTagNameMap[keyof SVGElementTagNameMap]}
    */
-  closest(selector) {
+  closest(selector: any) {
     return new Node(this.dom().closest(selector));
   }
 
@@ -379,7 +381,7 @@ class Node {
    * @param node
    * @return {Node}
    */
-  append(node) {
+  append(node: any) {
     let selectors = this.allDom();
 
     for (let i = 0; i < selectors.length; i++) {
@@ -394,7 +396,7 @@ class Node {
    * @param value
    * @return {*}
    */
-  text(value) {
+  text(value: any = undefined) {
     if (value === undefined) {
       return this.dom().textContent;
     }
